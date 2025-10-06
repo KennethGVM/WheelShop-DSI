@@ -1,7 +1,9 @@
+import Container from "@/layout/container";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+   <Container>
+    <h3>Home</h3>
+   </Container>
   )
 }
