@@ -23,3 +23,29 @@ export type SubSubModuleProps = {
   subSubModuleName: string;
   canAccess: boolean;
 };
+
+export interface CustomerProps {
+  customerId: string;
+  customerName: string;
+  customerLastName: string;
+  dni: string;
+  email: string;
+  phone: string;
+  state: boolean;
+  categoryCustomerId: string;
+  createdAt: Date;
+  categoryCustomerName: string;
+  address: string;
+  departmentId: string;
+  municipalityId: string;
+  municipalityName: string;
+  departmentName: string;
+
+}
+
+export interface CategoryCustomerProps {
+  categoryCustomerId: string;
+  categoryCustomerName: string;
+  state: boolean;
+  createdAt: Date;
+}
