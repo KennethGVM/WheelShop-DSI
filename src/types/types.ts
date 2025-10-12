@@ -49,3 +49,14 @@ export interface CategoryCustomerProps {
   state: boolean;
   createdAt: Date;
 }
+
+export interface DepartmetProps {
+  departmentId: string;
+  departmentName: string;
+}
+
+export interface MunicipalityProps {
+  municipalityId: string;
+  municipalityName: string;
+  departmentId: string;
+}
