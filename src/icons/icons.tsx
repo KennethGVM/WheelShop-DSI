@@ -77,3 +77,11 @@ export const SearchIcon = ({ className }: { className?: string }) => (
 
 export const ClockIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" className={className}><path d="M8.75 4a.75.75 0 0 0-1.5 0v4c0 .199.079.39.22.53l2 2a.749.749 0 1 0 1.06-1.06l-1.78-1.78z"></path><path fill-rule="evenodd" d="M15 8a7 7 0 1 1-14 0 7 7 0 0 1 14 0m-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 1 1 11 0"></path></svg>)
+
+  export const ArchiveIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" strokeWidth={0} fill="currentColor" width={16} height={16} className={className} viewBox="0 0 16 16"><path d="M6.25 8.75A.75.75 0 0 1 7 8h2a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1-.75-.75" /><path fillRule="evenodd" d="M3.25 1.5A1.75 1.75 0 0 0 1.5 3.25v2c0 .595.297 1.12.75 1.436v5.064A2.75 2.75 0 0 0 5 14.5h6a2.75 2.75 0 0 0 2.75-2.75V6.686c.453-.316.75-.841.75-1.436v-2a1.75 1.75 0 0 0-1.75-1.75zm9 5.5h-8.5v4.75c0 .69.56 1.25 1.25 1.25h6c.69 0 1.25-.56 1.25-1.25zM3 3.25A.25.25 0 0 1 3.25 3h9.5a.25.25 0 0 1 .25.25v2a.25.25 0 0 1-.25.25h-9.5A.25.25 0 0 1 3 5.25z" /></svg>
+)
+
+export const ArrowDownIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" strokeWidth={0} className={className} stroke="currentColor" width={16} height={16} viewBox="0 0 16 16"><path fillRule="evenodd" d="M3.72 6.47a.75.75 0 0 1 1.06 0l3.47 3.47 3.47-3.47a.749.749 0 1 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 0-1.06" /></svg>
+)
