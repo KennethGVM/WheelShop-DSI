@@ -58,3 +58,20 @@ export function useDebounce<T>(value: T): T {
 
   return debouncedValue;
 }
+
+export function exportToExcel(data: unknown[], fileName: string) {
+  if (!data || data.length === 0) {
+    showToast('No hay datos para exportar', false);
+    return;
+  }
+
+  const worksheet = XLSX.utils.json_to_sheet(data);
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
+
+  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+
+  const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+  saveAs(blob, `${fileName}.xlsx`);
+}
