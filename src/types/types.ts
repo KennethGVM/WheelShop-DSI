@@ -59,6 +59,71 @@ export interface MunicipalityProps {
   municipalityName: string;
   departmentId: string;
 }
+export interface BrandProps {
+  brandId: string;
+  brandName: string;
+  createdAt: Date;
+  state: boolean;
+  category: string;
+}
+
+
+export interface ProductSupplierProps {
+  supplierId: string;
+  productSupplierId: string;
+  price: number;
+  cost: number;
+  minPrice: number;
+  suggestedPrice: number;
+  supplierName?: string;
+}
+
+export interface ProductProps {
+  productId: string;
+  brandName: string;
+  description: string;
+  name: string;
+  brandId: string;
+  typeVehicleId: string;
+  nameTypeVehicle: string;
+  nameRin: string;
+  numeration: string;
+  state: boolean;
+  suppliers: ProductSupplierProps[];
+  createdAt?: Date;
+  productCategoryId: string;
+  productCategoryName: string;
+  brandOilId: string;
+  isDiesel: boolean;
+  numerationOil: string;
+  brandOilName: string;
+  storeHouseId: string;
+  storeHouseName: string;
+  storeHouseInventory: {
+    stock: number;
+    storeHouse: string;
+  }[]
+}
+
+export type ProductFilter = "Llantas" | "Aceites" | "Productos Varios";
+
+
+export interface SelectedProducts {
+  productId: string;
+  productSupplierId: string;
+  name: string;
+  quantity: number;
+  subTotal?: number;
+  discount?: number;
+  stock?: number;
+  cost?: number | string;
+  price?: number | string;
+  storeHouseId?: string;
+  storeHouseName?: string;
+  supplierId?: string;
+  nameSupplier?: string;
+  reason?: string;
+}
 
 export interface SupplierProps {
   supplierId: string;

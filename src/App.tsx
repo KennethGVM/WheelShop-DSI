@@ -6,9 +6,11 @@ import { useAuth } from './api/auth-provider';
 import Spinner from './components/spinner';
 import Login from './pages/auth/login';
 import Customer from './pages/customer/customer';
-import AddSupplier from './pages/supplier/add-supplier';
-import Supplier from './pages/supplier/supplier';
+import Brand from './pages/brand/brand';
+import Product from './pages/product/product';
 import AddCustomer from './pages/customer/add-customer';
+import Supplier from './pages/supplier/supplier';
+import AddSupplier from './pages/supplier/add-supplier';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -30,6 +32,14 @@ function App() {
     {
       path: '/customers',
       element: <ProtectedRoute element={<Customer />} />
+    },
+    {
+      path: '/brands',
+      element: <ProtectedRoute element={<Brand />} />
+    },
+    {
+      path: '/products',
+      element: <ProtectedRoute element={<Product />} />
     },
     {
       path: '/suppliers/add/:supplierId?',
