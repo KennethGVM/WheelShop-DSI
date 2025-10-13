@@ -40,7 +40,6 @@ export interface CustomerProps {
   municipalityId: string;
   municipalityName: string;
   departmentName: string;
-
 }
 
 export interface CategoryCustomerProps {
@@ -59,4 +58,15 @@ export interface MunicipalityProps {
   municipalityId: string;
   municipalityName: string;
   departmentId: string;
+}
+
+export interface SupplierProps {
+  supplierId: string;
+  ruc: string;
+  nameSupplier: string;
+  socialReason: string;
+  phone: string;
+  email: string;
+  state: boolean;
+  createdAt: Date;
 }
