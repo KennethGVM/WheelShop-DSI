@@ -7,6 +7,7 @@ import Spinner from './components/spinner';
 import Login from './pages/auth/login';
 import Customer from './pages/customer/customer';
 import Brand from './pages/brand/brand';
+import Product from './pages/product/product';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -32,6 +33,10 @@ function App() {
     {
       path: '/brands',
       element: <ProtectedRoute element={<Brand />} />
+    },
+    {
+      path: '/products',
+      element: <ProtectedRoute element={<Product />} />
     }
   ]);
 
