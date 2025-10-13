@@ -23,3 +23,11 @@ export type SubSubModuleProps = {
   subSubModuleName: string;
   canAccess: boolean;
 };
+
+export interface BrandProps {
+  brandId: string;
+  brandName: string;
+  createdAt: Date;
+  state: boolean;
+  category: string;
+}

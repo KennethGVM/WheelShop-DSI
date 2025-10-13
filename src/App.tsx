@@ -5,6 +5,7 @@ import { JSX } from 'react';
 import { useAuth } from './api/auth-provider';
 import Spinner from './components/spinner';
 import Login from './pages/auth/login';
+import Brand from './pages/brand/brand';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -23,6 +24,10 @@ function App() {
       path: '/login',
       element: <Login />
     },
+    {
+      path: '/brands',
+      element: <ProtectedRoute element={<Brand />} />
+    }
   ]);
 
   return (
