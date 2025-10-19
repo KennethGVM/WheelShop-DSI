@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FieldInput from "@/components/form/field-input";
-import Modal from "@/components/modal"; // Usa tu componente de modal actual
+import Modal from "@/components/modal"; // Usa el componente de modal actual
 import { showToast } from "@/components/toast";
 import { supabase } from "@/api/supabase-client";
 import { SupplierProps } from "@/types/types";
