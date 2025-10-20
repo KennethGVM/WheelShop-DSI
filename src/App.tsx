@@ -8,6 +8,7 @@ import Login from './pages/auth/login';
 import Customer from './pages/customer/customer';
 import Brand from './pages/brand/brand';
 import Product from './pages/product/product';
+import AddProduct from './pages/product/add-product';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -37,7 +38,11 @@ function App() {
     {
       path: '/products',
       element: <ProtectedRoute element={<Product />} />
-    }
+    },
+    {
+      path: 'products/add/:product_id?',
+      element: <ProtectedRoute element={<AddProduct />} />
+    },
   ]);
 
   return (
