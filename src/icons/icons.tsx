@@ -138,3 +138,26 @@ export const DeleteIcon = ({ className }: { className?: string }) => (
 export const BackIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} width={18} height={18} strokeWidth={0} stroke="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M14.75 8a.75.75 0 0 1-.75.75h-9.69l2.72 2.72a.749.749 0 1 1-1.06 1.06l-4-4a.747.747 0 0 1 0-1.06l4-4a.749.749 0 1 1 1.06 1.06l-2.72 2.72h9.69a.75.75 0 0 1 .75.75"></path></svg>
 )
+
+export const BranchIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 16 16" className={className}><path fillRule="evenodd" d="M12.25 14H9.173l.07-.061a18 18 0 0 0 1.707-1.758c1.224-1.46 2.55-3.574 2.55-5.954C13.5 3.06 11.172.75 8 .75S2.5 3.06 2.5 6.227c0 2.38 1.326 4.495 2.55 5.954.623.74 1.243 1.342 1.708 1.758l.069.061H3.75a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5M8 8.5a2 2 0 1 0 .001-3.999A2 2 0 0 0 8 8.5" /></svg>
+)
+
+export const RefreshIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 140 140" className={className}><path fill="#8C9196" fillRule="evenodd" d="M69.7 46c-8 0-15.3 5-19.3 10.9l4.1 2.7c.7.4.7 1.5-.1 1.9l-12.8 6.4c-.8.3-1.6-.2-1.6-1V52c0-.9 1-1.4 1.7-1l3.7 2.5c4.9-7.3 14-13.6 24.3-13.6a30 30 0 1 1 0 60 29.4 29.4 0 0 1-27-17.8 3 3 0 0 1 5.5-2.4A23.4 23.4 0 0 0 69.7 94a24 24 0 1 0 0-48zm6 35c.7 0 1.4-.3 2-.8 1.2-1.2 1-3.2-.3-4.5l-4.9-5V59c0-1-.3-1.8-.9-2.4-.5-.6-1.3-1-2.1-1-1.7 0-3 1.5-3 3.4v12.8c0 1 .3 1.9 1 2.6l5.7 5.6c.7.7 1.6 1.1 2.5 1.1z" clipRule="evenodd" /></svg>
+);
+
+export const GeneralIcon = ({ className, variant = "fill" }: { className?: string, variant?: "fill" | "stroke" }) => {
+  return variant === "fill" ? (
+    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 16 16" className={className}><path d="M10.278 1c.844 0 1.641.387 2.162 1.051l2.16 2.75.01.013c.736 1.03.238 2.396-.831 2.811h-1.17c-.475 0-.915-.244-1.166-.646l-.663-1.06a.62.62 0 0 0-.499-.293l-.03-.001a.62.62 0 0 0-.538.305.6.6 0 0 0-.07.173l-.075.298a1.615 1.615 0 0 1-3.136 0l-.075-.298a.6.6 0 0 0-.276-.383.6.6 0 0 0-.332-.095H5.72a.63.63 0 0 0-.5.294l-.662 1.06a1.38 1.38 0 0 1-1.166.646h-1.17C1.152 7.21.654 5.844 1.39 4.815L1.4 4.8l2.16-2.749A2.75 2.75 0 0 1 5.722 1z" /><path fillRule="evenodd" d="M2.5 8.875v4.375c0 .966.784 1.75 1.75 1.75h7.5a1.75 1.75 0 0 0 1.75-1.75V8.875h-.892a2.63 2.63 0 0 1-2.226-1.234l-.012-.02a2.866 2.866 0 0 1-4.74 0l-.012.02a2.63 2.63 0 0 1-2.226 1.234zM11 11.35a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2.4c0 .138.112.25.25.25h2.5a.25.25 0 0 0 .25-.25z" /></svg>
+  ) : (
+    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 16 16" className={className}><path fillRule="evenodd" d="M11.257 1H4.743c-.384 0-.746.176-.983.478L1.374 4.515A1.75 1.75 0 0 0 1 5.595v.655A2.75 2.75 0 0 0 2.5 8.7v4.55c0 .966.784 1.75 1.75 1.75h7.5a1.75 1.75 0 0 0 1.75-1.75V8.7A2.75 2.75 0 0 0 15 6.25v-.481c0-.504-.17-.994-.48-1.39l-2.28-2.901A1.25 1.25 0 0 0 11.257 1M11 13.5h.75a.25.25 0 0 0 .25-.25V9a2.74 2.74 0 0 1-2-.863C9.499 8.669 8.788 9 8 9s-1.499-.331-2-.863A2.74 2.74 0 0 1 4 9v4.25c0 .138.112.25.25.25H8V11a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1zm-7-6h-.25c-.69 0-1.25-.56-1.25-1.25v-.654q.001-.086.053-.155L4.865 2.5h6.27l2.205 2.805c.104.133.16.296.16.464v.481c0 .69-.56 1.25-1.25 1.25H12c-.69 0-1.25-.56-1.25-1.25v-.5a.75.75 0 0 0-1.5 0v.5a1.25 1.25 0 0 1-2.5 0v-.5a.75.75 0 0 0-1.5 0v.5c0 .69-.56 1.25-1.25 1.25" /></svg>)
+}
+
+export const InformationCircleIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path d="M8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0" /><path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0m-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 1 1 11 0" /></svg>
+)
+
+export const UploadIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path d="M8.75 10.75a.75.75 0 0 1-1.5 0V4.06L5.53 5.78a.749.749 0 1 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.749.749 0 1 1-1.06 1.06L8.75 4.06z" /><path d="M14.5 11.75a.75.75 0 0 0-1.5 0v.76a.75.75 0 0 1-.75.75h-8.5a.75.75 0 0 1-.75-.75v-.76a.75.75 0 0 0-1.5 0v.76a2.25 2.25 0 0 0 2.25 2.25h8.5a2.25 2.25 0 0 0 2.25-2.25z" /></svg>
+)

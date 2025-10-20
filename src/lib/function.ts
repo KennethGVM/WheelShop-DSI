@@ -22,6 +22,16 @@ export const handleAllowNegativeNumber = (e: React.ChangeEvent<HTMLInputElement>
   return e.target.defaultValue;
 };
 
+export function currencyFormatter(value: number | string, currency: string = "NIO") {
+  const locale = currency === 'USD' ? 'en-US' : 'es-NI';
+  const formatter = new Intl.NumberFormat(locale, {
+    style: 'currency',
+    minimumFractionDigits: 2,
+    currency: currency
+  })
+  return formatter.format(value as number)
+}
+
 export const getPermissions = (
   permissions: PermissionProps[] | null,
   moduleName: string,

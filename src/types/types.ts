@@ -154,3 +154,67 @@ export interface TypeVehicleProps {
   nameTypeVehicle: string;
   createdAt: Date;
 }
+
+export interface SaleProps {
+  saleId: string;
+  salesCode: string;
+  userId: string;
+  user?: string | null;
+  customerId: string;
+  customerName: string;
+  customerLastName?: string;
+  phone?: string;
+  email?: string;
+  dni?: string;
+  discount: number;
+  shippingCost: number;
+  subTotal: number;
+  total: number;
+  observation: string;
+  typeSale: number | null;
+  expirationDate: Date | null;
+  userIdCancellation: string | null;
+  cancellationUser?: string | null;
+  cancellationReason: string;
+  cancellationDate: Date | null;
+  state: number | boolean;
+  stateQuotation?: boolean | null;
+  createdAt: Date;
+  products: SaleProductProps[];
+  salePaymentDetails: salePaymentDetailProps[];
+  //return: ReturnProps[];
+  productCount?: number;
+  dollarChange: number;
+  pays?: number | null;
+}
+
+export interface SaleProductProps {
+  productSupplierId: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  productPrice: number;
+  productDiscount: number;
+  total: number;
+  subTotal: number;
+  storeHouseId: string;
+  storeHouseName: string;
+  supplierId: string;
+  nameSupplier: string;
+  reason: string;
+
+}
+
+export interface salePaymentDetailProps {
+  salePaymentDetailId: string;
+  saleId?: string;
+  paymentMethodId: string;
+  namePaymentMethod?: string;
+  amount: number;
+  currencyId: string;
+  currencyName?: string;
+  reference: string;
+  bankId: string | null;
+  bankName?: string;
+}
+
