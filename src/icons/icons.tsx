@@ -134,3 +134,7 @@ export const SelectorIcon = ({ className }: { className?: string }) => (
 export const DeleteIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" height={16} width={16} strokeWidth={0} fill="currentColor" className={className} viewBox="0 0 16 16"><path d="M9.5 6.25a.75.75 0 0 1 .75.75v4.25a.75.75 0 0 1-1.5 0V7a.75.75 0 0 1 .75-.75M7.25 7a.75.75 0 0 0-1.5 0v4.25a.75.75 0 0 0 1.5 0z" /><path fillRule="evenodd" d="M5.25 3.25a2.75 2.75 0 1 1 5.5 0h3a.75.75 0 0 1 0 1.5H13v5.45c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C10.72 15 9.88 15 8.2 15h-.4c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 12.72 3 11.88 3 10.2V4.75h-.75a.75.75 0 0 1 0-1.5zm1.5 0a1.25 1.25 0 0 1 2.5 0zM4.5 4.75h7v5.45c0 .865-.001 1.423-.036 1.848-.033.408-.09.559-.128.633a1.5 1.5 0 0 1-.655.655c-.074.038-.225.095-.633.128-.425.035-.983.036-1.848.036h-.4c-.865 0-1.423-.001-1.848-.036-.408-.033-.559-.09-.633-.128a1.5 1.5 0 0 1-.656-.655c-.037-.074-.094-.225-.127-.633-.035-.425-.036-.983-.036-1.848z" /></svg>
 )
+
+export const BackIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className={className} width={18} height={18} strokeWidth={0} stroke="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M14.75 8a.75.75 0 0 1-.75.75h-9.69l2.72 2.72a.749.749 0 1 1-1.06 1.06l-4-4a.747.747 0 0 1 0-1.06l4-4a.749.749 0 1 1 1.06 1.06l-2.72 2.72h9.69a.75.75 0 0 1 .75.75"></path></svg>
+)

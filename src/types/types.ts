@@ -135,3 +135,22 @@ export interface SupplierProps {
   state: boolean;
   createdAt: Date;
 }
+
+export interface BrandOilProps {
+  brandOilId: string;
+  brandOilName: string;
+  createdAt: Date;
+}
+
+export interface productCategoryProps {
+  productCategoryId: string;
+  productCategoryName: string;
+  state: boolean;
+  createdAt: Date;
+}
+
+export interface TypeVehicleProps {
+  typeVehicleId: string;
+  nameTypeVehicle: string;
+  createdAt: Date;
+}
