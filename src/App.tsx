@@ -12,6 +12,8 @@ import AddProduct from './pages/product/add-product';
 import AddCustomer from './pages/customer/add-customer';
 import Supplier from './pages/supplier/supplier';
 import AddSupplier from './pages/supplier/add-supplier';
+import AddPurchase from './pages/purchase/add-purchase';
+import Purchase from './pages/purchase/purchase';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -62,6 +64,14 @@ function App() {
       path: 'customers/add/:customerId?',
       element: <ProtectedRoute element={<AddCustomer />} />
     },
+    {
+      path: 'purchases',
+      element: <ProtectedRoute element={<Purchase />} />
+    },
+    {
+      path: 'purchases/add/:purchaseId?',
+      element: <ProtectedRoute element={<AddPurchase />} />
+    }
   ]);
 
   return (

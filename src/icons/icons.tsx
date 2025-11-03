@@ -14,8 +14,24 @@ export const AsideArrowIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} width={21} height={28} fill="none"><path fill="#B5B5B5" d="M19 14.25h.75v1.5H19v-1.5Zm-8.923-.888.668-.34-.668.34Zm1.311 1.311.34-.668-.34.668ZM10.5 0v10.2H9V0h1.5Zm4.05 14.25H19v1.5h-4.45v-1.5ZM10.5 10.2c0 .853 0 1.447.038 1.91.037.453.107.714.207.912l-1.336.68c-.227-.444-.321-.924-.366-1.47C9 11.694 9 11.027 9 10.2h1.5Zm4.05 5.55c-.828 0-1.494 0-2.032-.043-.546-.045-1.026-.14-1.47-.366l.68-1.336c.198.1.459.17.913.207.462.037 1.056.038 1.909.038v1.5Zm-3.805-2.729c.216.424.56.768.984.984l-.681 1.336a3.75 3.75 0 0 1-1.64-1.638l1.337-.681Z" /><path stroke="#B5B5B5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m17 12 3 3-3 3" /></svg>
 )
 
+export const AngleLeftIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path fillRule="evenodd" d="M14.75 8a.75.75 0 0 1-.75.75H4.31l2.72 2.72a.749.749 0 1 1-1.06 1.06l-4-4a.747.747 0 0 1 0-1.06l4-4a.749.749 0 1 1 1.06 1.06L4.31 7.25H14a.75.75 0 0 1 .75.75" /></svg>
+)
+
+export const AngleRightIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path fillRule="evenodd" d="M1.5 8a.75.75 0 0 1 .75-.75h9.69L9.22 4.53a.749.749 0 1 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.749.749 0 1 1-1.06-1.06l2.72-2.72H2.25A.75.75 0 0 1 1.5 8" /></svg>
+)
+
 export const BillingIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 16 16" className={className}><path fillRule="evenodd" d="M3.142 14.934A1 1 0 0 1 2.5 14V3a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v11a1 1 0 0 1-1.743.669L10.255 13h-.01l-1.502 1.669a1 1 0 0 1-1.486 0L5.755 13h-.01l-1.502 1.669a1 1 0 0 1-1.101.265M7.5 3.25a.75.75 0 0 1 1.5 0v.5h.75a.75.75 0 0 1 0 1.5H7.375a.625.625 0 0 0 0 1.25h1.25a2.124 2.124 0 1 1 0 4.25H8.5v.5a.75.75 0 0 1-1.5 0v-.5h-.75a.75.75 0 0 1 0-1.5h2.375a.625.625 0 0 0 0-1.25h-1.25a2.124 2.124 0 1 1 0-4.25H7.5z" /></svg>
+)
+
+export const ThreeDotsIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className={className} width={16} height={16} strokeWidth={0} fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 4 8M9.5 8a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 9.5 8M13.5 9.5a1.5 1.5 0 1 0-.001-3.001A1.5 1.5 0 0 0 13.5 9.5" /></svg>
+)
+
+export const CalendarIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path fillRule="evenodd" d="M5.75 1.5a.75.75 0 0 0-1.5 0v.407a3 3 0 0 0-.702.252c-.706.36-1.28.933-1.64 1.639-.226.444-.32.924-.365 1.47-.043.531-.043 1.187-.043 2v1.464c0 .813 0 1.469.043 2 .045.546.14 1.026.366 1.47.36.706.933 1.28 1.639 1.64.444.226.924.32 1.47.365.531.043 1.187.043 2 .043h3.383c.323 0 .542 0 .735-.02a3.75 3.75 0 0 0 3.344-3.344c.02-.193.02-.412.02-.735V7.268c0-.813 0-1.469-.043-2-.045-.546-.14-1.026-.366-1.47a3.76 3.76 0 0 0-1.638-1.64 3 3 0 0 0-.703-.251V1.5a.75.75 0 0 0-1.5 0v.259c-.373-.009-.794-.009-1.268-.009H7.018c-.474 0-.895 0-1.268.009zM4.229 3.495c.197-.1.458-.17.912-.207.462-.037 1.057-.038 1.909-.038h1.9c.852 0 1.447 0 1.91.038.453.037.714.107.912.207.423.216.767.56.983.984.1.197.17.458.207.912.014.18.024.38.029.609H3.009q.008-.34.03-.61c.036-.453.106-.714.206-.911a2.25 2.25 0 0 1 .984-.984M3 7.5v1.2c0 .852 0 1.447.038 1.91.037.453.107.714.207.912.216.423.56.767.984.983.197.1.458.17.912.207.462.037 1.057.038 1.909.038h3.306c.385 0 .52-.001.626-.012a2.25 2.25 0 0 0 2.006-2.006c.011-.106.012-.241.012-.626V7.5z" /></svg>
 )
 
 export const CustomersIcon = ({ className }: { className?: string }) => (
@@ -78,7 +94,7 @@ export const SearchIcon = ({ className }: { className?: string }) => (
 export const ClockIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" className={className}><path d="M8.75 4a.75.75 0 0 0-1.5 0v4c0 .199.079.39.22.53l2 2a.749.749 0 1 0 1.06-1.06l-1.78-1.78z"></path><path fill-rule="evenodd" d="M15 8a7 7 0 1 1-14 0 7 7 0 0 1 14 0m-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 1 1 11 0"></path></svg>)
 
-  export const ArchiveIcon = ({ className }: { className?: string }) => (
+export const ArchiveIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" strokeWidth={0} fill="currentColor" width={16} height={16} className={className} viewBox="0 0 16 16"><path d="M6.25 8.75A.75.75 0 0 1 7 8h2a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1-.75-.75" /><path fillRule="evenodd" d="M3.25 1.5A1.75 1.75 0 0 0 1.5 3.25v2c0 .595.297 1.12.75 1.436v5.064A2.75 2.75 0 0 0 5 14.5h6a2.75 2.75 0 0 0 2.75-2.75V6.686c.453-.316.75-.841.75-1.436v-2a1.75 1.75 0 0 0-1.75-1.75zm9 5.5h-8.5v4.75c0 .69.56 1.25 1.25 1.25h6c.69 0 1.25-.56 1.25-1.25zM3 3.25A.25.25 0 0 1 3.25 3h9.5a.25.25 0 0 1 .25.25v2a.25.25 0 0 1-.25.25h-9.5A.25.25 0 0 1 3 5.25z" /></svg>
 )
 
