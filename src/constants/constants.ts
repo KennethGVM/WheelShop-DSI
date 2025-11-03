@@ -12,3 +12,20 @@ export const COLORS = {
   greenprimary: '#affebf',
   darkgreen: '#014b40'
 }
+
+export const MONTHS = [
+  "enero",
+  "febrero",
+  "marzo",
+  "abril",
+  "mayo",
+  "junio",
+  "julio",
+  "agosto",
+  "septiembre",
+  "octubre",
+  "noviembre",
+  "diciembre",
+]
+
+export const DAYS = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]

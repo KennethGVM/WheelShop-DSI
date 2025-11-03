@@ -49,6 +49,57 @@ export interface CategoryCustomerProps {
   createdAt: Date;
 }
 
+export interface PurchaseProps {
+  purchaseOrderId: string;
+  codePurchaseOrder: string;
+  supplierId: string;
+  storeHouseId: string;
+  paymentMethodId: string;
+  currencyId: string;
+  currencyName: string;
+  shippingCost: number;
+  arrivalDate: Date | null;
+  referenceNumber: string;
+  observations: string;
+  subTotal: number;
+  discount: number;
+  total: number;
+  state: number;
+  createdAt: Date;
+  namePaymentMethod: string;
+  nameSupplier: string;
+  namestorehouse: string;
+  expirationDate: Date | null;
+  paymentConditionId: string | null;
+  purchaseType: number;
+  products: PurchaseProductProps[];
+}
+
+export interface PurchaseProductProps {
+  productSupplierId: string;
+  productName: string;
+  quantity: number;
+  cost: number;
+  total: number;
+}
+
+export interface CurrencyProps {
+  currencyId: string;
+  currencyName: string;
+}
+
+export interface PaymentMethodProps {
+  paymentMethodId: string;
+  namePaymentMethod: string;
+  createdAt: Date;
+}
+
+export interface PaymentConditionProps {
+  paymentConditionId: string;
+  name: string;
+  createdAt: Date;
+}
+
 export interface DepartmetProps {
   departmentId: string;
   departmentName: string;
