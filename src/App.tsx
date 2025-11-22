@@ -28,6 +28,14 @@ import AddStoreHouse from './pages/setting/store-house/add-store-house';
 import NotificationCustomer from './pages/setting/notification/notification-customer';
 import Notification from './pages/setting/notification/notification';
 import AddUser from './pages/setting/user-permission/add-user';
+import Closing from './pages/cash-box/closing/closing';
+import CashBoxClosing from './pages/cash-box/closing/cash-box-closing';
+import CashBox from './pages/cash-box/cash-box';
+import CashBoxOpening from './pages/cash-box/cash-box-opening';
+import Opening from './pages/cash-box/opening/opening';
+import Arching from './pages/cash-box/arching/arching';
+import Expense from './pages/expense/expense';
+import PendingAccount from './pages/pendingAccount/pending-account';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -99,6 +107,10 @@ function App() {
       element: <ProtectedRoute element={<AddTransfer />} />
     },
     {
+      path: '/expenses',
+      element: <ProtectedRoute element={<Expense />} />
+    },
+    {
       path: "/settings",
       element: <ProtectedRoute element={<Settings />} />,
       children: [
@@ -144,6 +156,34 @@ function App() {
         }
 
       ],
+    },
+    {
+      path: '/closings',
+      element: <Closing />
+    },
+    {
+      path: '/closings/add/:cashBoxId',
+      element: <CashBoxClosing />
+    },
+    {
+      path: '/cash-box/',
+      element: <CashBox />
+    },
+    {
+      path: '/cash-box/opening/:cashBoxId',
+      element: <CashBoxOpening />
+    },
+    {
+      path: '/pending-accounts',
+      element: <ProtectedRoute element={<PendingAccount />} />
+    },
+    {
+      path: '/openings',
+      element: <Opening />
+    },
+    {
+      path: '/archings',
+      element: <Arching />
     },
   ]);
 
