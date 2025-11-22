@@ -218,3 +218,98 @@ export interface salePaymentDetailProps {
   bankName?: string;
 }
 
+export interface ReturnProps {
+  returnId: string;
+  subTotal: number;
+  shippingCost: number;
+  discount: number;
+  total: number;
+  userId: string;
+  returnUser?: string | null | undefined;
+  createdAt: Date;
+  returnDetail: RetunDetailProps[];
+  returnPaymentDetail: ReturnPaymentDetailProps[];
+  dollarChange: number;
+}
+
+export interface RetunDetailProps {
+  returnDetailId: string;
+  returnId: string;
+  productSupplierId: string;
+  productName?: string;
+  productPrice: number;
+  quantity: number;
+  subTotal: number;
+  discount: number;
+  total: number;
+  reason: string;
+  type: boolean;
+  storeHouseId: string;
+  storeHouseName: string;
+  supplierId: string;
+  supplierName: string;
+  createdAt: Date;
+}
+
+export interface ReturnPaymentDetailProps {
+  returnPaymentDetailId: string;
+  returnId?: string;
+  amount: number;
+  reference: string;
+  bankId: string | null;
+  currencyId: string;
+  currencyName?: string;
+  paymentMethodId: string;
+  namePaymentMethod?: string;
+  bankName?: string | null;
+  createdAt: Date;
+}
+
+export interface QuotationProps {
+  quotationId: string;
+  quotationCode: string;
+  userId: string;
+  user?: string | null;
+  customerId: string;
+  customerName: string;
+  customerLastName?: string;
+  phone: string;
+  email: string;
+  dni: string;
+  discount: number;
+  shippingCost: number;
+  subTotal: number;
+  total: number;
+  observation: string;
+  state: boolean;
+  createdAt: Date;
+  products: QuotationProductProps[];
+  newProducts?: newProduct[];
+  productCount?: number;
+}
+
+
+export interface QuotationProductProps {
+  productSupplierId: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  productPrice: number;
+  productDiscount: number;
+  total: number;
+  subTotal: number;
+  storeHouseId: string;
+  storeHouseName: string;
+  supplierId: string;
+  nameSupplier: string;
+}
+
+export interface newProduct {
+  productId: string;
+  productName: string;
+  price: number;
+  quantity: number;
+  discount: number;
+  subTotal: number;
+  total: number;
+}

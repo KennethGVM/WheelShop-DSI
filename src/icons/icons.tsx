@@ -161,3 +161,7 @@ export const InformationCircleIcon = ({ className }: { className?: string }) => 
 export const UploadIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path d="M8.75 10.75a.75.75 0 0 1-1.5 0V4.06L5.53 5.78a.749.749 0 1 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.749.749 0 1 1-1.06 1.06L8.75 4.06z" /><path d="M14.5 11.75a.75.75 0 0 0-1.5 0v.76a.75.75 0 0 1-.75.75h-8.5a.75.75 0 0 1-.75-.75v-.76a.75.75 0 0 0-1.5 0v.76a2.25 2.25 0 0 0 2.25 2.25h8.5a2.25 2.25 0 0 0 2.25-2.25z" /></svg>
 )
+
+export const ThreeDotsIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className={className} width={16} height={16} strokeWidth={0} fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 4 8M9.5 8a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 9.5 8M13.5 9.5a1.5 1.5 0 1 0-.001-3.001A1.5 1.5 0 0 0 13.5 9.5" /></svg>
+)

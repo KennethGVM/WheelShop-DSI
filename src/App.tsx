@@ -12,6 +12,7 @@ import AddProduct from './pages/product/add-product';
 import AddCustomer from './pages/customer/add-customer';
 import Supplier from './pages/supplier/supplier';
 import AddSupplier from './pages/supplier/add-supplier';
+import Sale from './pages/sale/sale';
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { user, loading } = useAuth();
@@ -61,6 +62,10 @@ function App() {
     {
       path: 'customers/add/:customerId?',
       element: <ProtectedRoute element={<AddCustomer />} />
+    },
+    {
+      path: '/sales',
+      element: <ProtectedRoute element={<Sale />} />
     },
   ]);
 
