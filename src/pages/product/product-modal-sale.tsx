@@ -1,5 +1,3 @@
-"use client"
-
 import { supabase } from "@/api/supabase-client"
 import Button from "@/components/form/button"
 import FieldInput from "@/components/form/field-input"

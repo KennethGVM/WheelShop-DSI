@@ -32,7 +32,6 @@ export default function DateTimePicker({ name, id, onChange, value, disabled = f
     if (value !== undefined) {
       setInputValue(formatDate(value) ?? "")
 
-      // Si hay un value, actualizar el mes mostrado
       if (value) {
         setCurrentMonth(new Date(value.getFullYear(), value.getMonth(), 1))
       }
