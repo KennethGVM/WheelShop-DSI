@@ -892,3 +892,10 @@ export interface ClosingProps {
   expense: number;
   income: number;
 }
+
+export enum TYPEDISCOUNTS {
+  ProductAmount = 'Importe de descuento en productos',
+  BuyXGetY = 'Compra X y obtén Y',
+  FreeShipping = 'Envío gratis',
+  OrderAmount = 'Importe de descuento en el pedido',
+}
