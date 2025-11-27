@@ -185,6 +185,7 @@ function App() {
       path: '/archings',
       element: <Arching />
     },
+    
   ]);
 
   return (
