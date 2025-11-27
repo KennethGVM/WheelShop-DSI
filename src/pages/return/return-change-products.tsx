@@ -20,8 +20,9 @@ export default function ReturnChangeProducts({ isModalOpen, handleChangeShowModa
     { label: "Cantidad", className: "px-2 py-3 'text-right'}" },
     { label: "Total", className: "text-right pr-20" },
   ]
-  const [returns, setReturns] = useState<ReturnProps[]>([])
-  const [adjustedQuantity, setAdjustedQuantity] = useState(0)
+const [returns] = useState<ReturnProps[]>([])
+const [adjustedQuantity] = useState(0)
+
 
   const handleCloseModal = () => {
     handleChangeShowModal('products', false)

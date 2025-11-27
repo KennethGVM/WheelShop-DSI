@@ -5,7 +5,6 @@ import { useState } from "react";
 
 interface BrandFiltersProps {
   isSearching: boolean;
-  filters: { category: string | null; state: string | null };
   setFilters: React.Dispatch<React.SetStateAction<{ category: string | null; state: string | null }>>;
 }
 // Definimos las opciones para cada tipo de filtro
@@ -14,7 +13,7 @@ const FILTER_OPTIONS: Record<string, string[]> = {
   "Estado": ["Activo", "Inactivo"],
 };
 
-export default function BrandFilters({ isSearching, filters, setFilters }: BrandFiltersProps) {
+export default function BrandFilters({ isSearching, setFilters }: BrandFiltersProps) {
   const ALL_FILTERS = Object.keys(FILTER_OPTIONS);
   const FIXED_FILTERS = ALL_FILTERS.slice(0, 3);
   const [selectedFilters, setSelectedFilters] = useState<string[]>(FIXED_FILTERS);
@@ -37,16 +36,7 @@ export default function BrandFilters({ isSearching, filters, setFilters }: Brand
     setSelectedOptions(newSelectedOptions);
   };
 
-  const toggleOption = (filter: string, option: string) => {
-    setSelectedOptions(prev => {
-      const currentOptions = prev[filter] || [];
-      const newOptions = currentOptions.includes(option)
-        ? currentOptions.filter(o => o !== option)
-        : [...currentOptions, option];
 
-      return { ...prev, [filter]: newOptions };
-    });
-  }
   return (
     <div className={`overflow-hidden transition-all duration-200 ease-out ${isSearching ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}`}>
       <div className="flex items-center space-x-2 py-1.5 px-2 bg-white transform transition-transform duration-200 ease-out translate-y-0">

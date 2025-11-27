@@ -1,8 +1,6 @@
 import CheckBox from '@/components/form/check-box';
 import Button from '@/components/form/button';
-import { Dropdown, DropdownContent, DropdownItem, DropdownSeparator, DropdownTrigger } from '@/components/form/dropdown';
 import { PendingAccountProps } from '@/types/types';
-import { ArchiveIcon, ThreeDotsIcon } from '@/icons/icons';
 import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {

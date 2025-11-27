@@ -1,5 +1,4 @@
 import FieldInput from '@/components/form/field-input'
-import RadioButton from '@/components/form/radio-button'
 import SubHeader from '@/components/sub-header'
 import { InformationCircleIcon } from '@/icons/icons'
 import FormSection from '@/layout/form-section'
@@ -16,7 +15,6 @@ import ToolTip from '@/components/tool-tip'
 export default function AddUser() {
   const ADMIN_ROLE_NAME = 'Administrador'
   const { userId } = useParams()
-  const [isAuthenticationTwoSteps, setIsAuthenticationTwoSteps] = useState<boolean>(true)
   const [loginHistory, setLoginHistory] = useState<LoginHistoryProps[]>([])
   const [selectedRole, setSelectedRole] = useState<RoleProps | null>(null)
   const [formUser, setFormUser] = useState({

@@ -18,7 +18,6 @@ import PendingAccountReport from './pending-account-report';
 import RealSaleReportPDF from './real-sale-report';
 import { InventoryMoneyReport } from './inventory-money-report';
 import FieldSelect from '@/components/form/field-select';
-import { set } from 'date-fns';
 
 interface ReportTableProps {
   reports: ReportProps[];
@@ -46,20 +45,20 @@ export default function ReportTable({ reports, setReports }: ReportTableProps) {
     endDate: new Date(),
   });
 
-  enum ReportName {
-    MonthlySales = 'Ventas mensuales',
-    MonthlyGrossSales = 'Ventas brutas mensuales',
-    MonthlyTireSales = 'Ventas de llantas mensuales',
-    MonthlyPurchases = 'Compras mensuales',
-    CustomersWithPendingAccounts = 'Clientes con cuentas pendientes',
-    BestSellingProducts = 'Productos mas vendidos',
-    WorstSellingProducts = 'Productos menos vendidos',
-    EndOfMonthInventory = 'Inventario final del mes',
-    WarehouseTransfers = 'Traslados de bodegas',
-    InventoryMoney = 'Inventario final monetario',
-    InventoryMoneyByStore = 'Inventario final monetario por bodega',
-  }
-
+const ReportName = {
+    MonthlySales: 'Ventas mensuales',
+    MonthlyGrossSales: 'Ventas brutas mensuales',
+    MonthlyTireSales: 'Ventas de llantas mensuales',
+    MonthlyPurchases: 'Compras mensuales',
+    CustomersWithPendingAccounts: 'Clientes con cuentas pendientes',
+    BestSellingProducts: 'Productos mas vendidos',
+    WorstSellingProducts: 'Productos menos vendidos',
+    EndOfMonthInventory: 'Inventario final del mes',
+    WarehouseTransfers: 'Traslados de bodegas',
+    InventoryMoney: 'Inventario final monetario',
+    InventoryMoneyByStore: 'Inventario final monetario por bodega',
+  } as const;
+  
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
