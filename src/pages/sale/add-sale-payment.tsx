@@ -543,6 +543,7 @@ export default function AddSalePayment({ products, formData, setFormData, isModa
                     min={0}
                     isNumber
                   />
+                 
                 </div>
               </div>
             </Modal>
