@@ -167,9 +167,6 @@ export const InformationCircleIcon = ({ className }: { className?: string }) => 
   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path d="M8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0" /><path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0m-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 1 1 11 0" /></svg>
 )
 
-export const UploadIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path d="M8.75 10.75a.75.75 0 0 1-1.5 0V4.06L5.53 5.78a.749.749 0 1 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.749.749 0 1 1-1.06 1.06L8.75 4.06z" /><path d="M14.5 11.75a.75.75 0 0 0-1.5 0v.76a.75.75 0 0 1-.75.75h-8.5a.75.75 0 0 1-.75-.75v-.76a.75.75 0 0 0-1.5 0v.76a2.25 2.25 0 0 0 2.25 2.25h8.5a2.25 2.25 0 0 0 2.25-2.25z" /></svg>
-)
 
 export const AsideArrowIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} width={21} height={28} fill="none"><path fill="#B5B5B5" d="M19 14.25h.75v1.5H19v-1.5Zm-8.923-.888.668-.34-.668.34Zm1.311 1.311.34-.668-.34.668ZM10.5 0v10.2H9V0h1.5Zm4.05 14.25H19v1.5h-4.45v-1.5ZM10.5 10.2c0 .853 0 1.447.038 1.91.037.453.107.714.207.912l-1.336.68c-.227-.444-.321-.924-.366-1.47C9 11.694 9 11.027 9 10.2h1.5Zm4.05 5.55c-.828 0-1.494 0-2.032-.043-.546-.045-1.026-.14-1.47-.366l.68-1.336c.198.1.459.17.913.207.462.037 1.056.038 1.909.038v1.5Zm-3.805-2.729c.216.424.56.768.984.984l-.681 1.336a3.75 3.75 0 0 1-1.64-1.638l1.337-.681Z" /><path stroke="#B5B5B5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m17 12 3 3-3 3" /></svg>
@@ -193,6 +190,11 @@ export const GeneralIcon = ({ className, variant = "fill" }: { className?: strin
 export const BillingIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 16 16" className={className}><path fillRule="evenodd" d="M3.142 14.934A1 1 0 0 1 2.5 14V3a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v11a1 1 0 0 1-1.743.669L10.255 13h-.01l-1.502 1.669a1 1 0 0 1-1.486 0L5.755 13h-.01l-1.502 1.669a1 1 0 0 1-1.101.265M7.5 3.25a.75.75 0 0 1 1.5 0v.5h.75a.75.75 0 0 1 0 1.5H7.375a.625.625 0 0 0 0 1.25h1.25a2.124 2.124 0 1 1 0 4.25H8.5v.5a.75.75 0 0 1-1.5 0v-.5h-.75a.75.75 0 0 1 0-1.5h2.375a.625.625 0 0 0 0-1.25h-1.25a2.124 2.124 0 1 1 0-4.25H7.5z" /></svg>
 )
+
+export const UploadIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width={16} height={16} strokeWidth={0} className={className} viewBox="0 0 16 16"><path d="M8.75 10.75a.75.75 0 0 1-1.5 0V4.06L5.53 5.78a.749.749 0 1 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.749.749 0 1 1-1.06 1.06L8.75 4.06z" /><path d="M14.5 11.75a.75.75 0 0 0-1.5 0v.76a.75.75 0 0 1-.75.75h-8.5a.75.75 0 0 1-.75-.75v-.76a.75.75 0 0 0-1.5 0v.76a2.25 2.25 0 0 0 2.25 2.25h8.5a2.25 2.25 0 0 0 2.25-2.25z" /></svg>
+)
+
 
 export const UserPermissions = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} stroke="currentColor" viewBox="0 0 16 16" className={className}><path fillRule="evenodd" d="M2.5 4.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0M10.751 15H10a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3.5V8.25a.75.75 0 0 0-1.5 0 .75.75 0 0 1-1.5 0 2.25 2.25 0 1 1 4.5 0V10a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1zM8.605 9.567C8.232 9.93 8 10.437 8 11v3c0 .364.097.706.268 1h-.854a1 1 0 0 1-.1.007h-5.93c-.408 0-.805-.167-1.074-.478a1.26 1.26 0 0 1-.24-1.243c.322-.96 1.094-2.246 2.361-3.157a5.83 5.83 0 0 1 2.762-1.067A5.4 5.4 0 0 1 6 9c.915 0 1.8.2 2.605.567" /></svg>

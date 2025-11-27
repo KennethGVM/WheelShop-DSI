@@ -753,6 +753,45 @@ export interface ReturnPaymentDetailProps {
   createdAt: Date;
 }
 
+export interface QuotationProps {
+  quotationId: string;
+  quotationCode: string;
+  userId: string;
+  user?: string | null;
+  customerId: string;
+  customerName: string;
+  customerLastName?: string;
+  phone: string;
+  email: string;
+  dni: string;
+  discount: number;
+  shippingCost: number;
+  subTotal: number;
+  total: number;
+  observation: string;
+  state: boolean;
+  createdAt: Date;
+  products: QuotationProductProps[];
+  newProducts?: newProduct[];
+  productCount?: number;
+}
+
+
+export interface QuotationProductProps {
+  productSupplierId: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  productPrice: number;
+  productDiscount: number;
+  total: number;
+  subTotal: number;
+  storeHouseId: string;
+  storeHouseName: string;
+  supplierId: string;
+  nameSupplier: string;
+}
+
 export interface newProduct {
   productId: string;
   productName: string;
@@ -852,4 +891,11 @@ export interface ClosingProps {
   beginningBalance: number;
   expense: number;
   income: number;
+}
+
+export enum TYPEDISCOUNTS {
+  ProductAmount = 'Importe de descuento en productos',
+  BuyXGetY = 'Compra X y obtén Y',
+  FreeShipping = 'Envío gratis',
+  OrderAmount = 'Importe de descuento en el pedido',
 }
