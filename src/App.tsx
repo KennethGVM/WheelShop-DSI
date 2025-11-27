@@ -37,6 +37,8 @@ import AdjustmentHistory from './pages/product/adjustment-history';
 import AddTransfer from './pages/transfer/add-transfer';
 import Transfer from './pages/transfer/transfer';
 import Quotation from './pages/quotation/quotation';
+import Discount from './pages/discount/discount';
+import AddDiscount from './pages/discount/add-discount';
 import Return from './pages/return/return';
 import CashBox from './pages/cash-box/cash-box';
 import CashBoxOpening from './pages/cash-box/cash-box-opening';
@@ -51,6 +53,7 @@ import StoreHouse from './pages/setting/store-house/store-house';
 import AddStoreHouse from './pages/setting/store-house/add-store-house';
 import Expense from './pages/expense/expense';
 import Opening from './pages/cash-box/opening/opening';
+import Report from './pages/statistics-report/report/report';
 import Brand from './pages/brand/brand';
 import Closing from './pages/cash-box/closing/closing';
 import CashBoxClosing from './pages/cash-box/closing/cash-box-closing';
@@ -130,6 +133,10 @@ function App() {
       element: <ProtectedRoute element={<AddSale />} />
     },
     {
+      path: '/discounts',
+      element: <Discount />,
+    },
+    {
       path: '/cash-box/',
       element: <CashBox />
     },
@@ -146,8 +153,16 @@ function App() {
       element: <Arching />
     },
     {
+      path: '/reports',
+      element: <Report />
+    },
+    {
       path: '/archings/add/:cashBoxId',
       element: <CashBoxArching />
+    },
+    {
+      path: '/discounts/add/:discountId?',
+      element: <AddDiscount />
     },
     {
       path: '/transfers',
