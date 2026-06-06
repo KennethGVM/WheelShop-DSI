@@ -3,7 +3,7 @@ import { PlusCircleIcon } from "@/icons/icons";
 import FormSection from "@/layout/form-section";
 import ProductModalSale from "../product/product-modal-sale";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ReturnProps, SelectedProducts } from "@/types/types";
+import { SelectedProducts } from "@/types/types";
 import AddSaleRowProduct from "../sale/add-sale-row-product";
 
 interface ReturnChangeProductsProps {
@@ -81,6 +81,10 @@ const [adjustedQuantity] = useState(0)
                       index,
                     ) => (
                       <AddSaleRowProduct
+                        productCount={0}
+                        total={0}
+                        saleId=""
+                        onDiscountApplied={() => { }}
                         key={index}
                         price={Number(price) || 0}
                         index={index}
@@ -94,14 +98,13 @@ const [adjustedQuantity] = useState(0)
                         supplierId={supplierId}
                         nameSupplier={nameSupplier}
                         isMobile={false}
-                        returns={returns}
-                        adjustedQuantity={adjustedQuantity}
+                        returns={[]}
+                        adjustedQuantity={0}
                         productId={productId}
                         updateDiscountForProductId={updateDiscountForProductId}
                         productSupplierId={productSupplierId}
                         isQuotation={false}
                         stateQuotation={false}
-
                       />
                     ),
                   )}
@@ -116,6 +119,10 @@ const [adjustedQuantity] = useState(0)
                   index,
                 ) => (
                   <AddSaleRowProduct
+                    productCount={0}
+                    total={0}
+                    saleId=""
+                    onDiscountApplied={() => { }}
                     key={index}
                     price={Number(price) || 0}
                     index={index}
@@ -129,8 +136,8 @@ const [adjustedQuantity] = useState(0)
                     supplierId={supplierId}
                     nameSupplier={nameSupplier}
                     isMobile={true}
-                    returns={returns}
-                    adjustedQuantity={adjustedQuantity}
+                    returns={[]}
+                    adjustedQuantity={0}
                     productId={productId}
                     updateDiscountForProductId={updateDiscountForProductId}
                     productSupplierId={productSupplierId}

@@ -2,14 +2,14 @@ import { useRolePermission } from '@/api/permissions-provider';
 import Container from '@/layout/container';
 import { currencyFormatter, getPermissions } from '@/lib/function';
 import AccessPage from './access-page';
-import { LineChart, BarChart } from '@shopify/polaris-viz';
+import { LineChart, BarChart, } from '@shopify/polaris-viz';
 import '@shopify/polaris-viz/build/esm/styles.css';
 import FormSection from '@/layout/form-section';
 import DatePicker from '@/components/form/date-picker';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/api/supabase-client';
 import { showToast } from '@/components/toast';
-import { ProductReportProps, StoreHouseProps, TotalInventoryProps } from '@/types/types';
+import { ParetoDataProps, PredictionDataProps, ProductReportProps, StoreHouseProps, TopClientsProps, TotalInventoryProps } from '@/types/types';
 import Button from '@/components/form/button';
 import { CheckIcon, StoreHouseMoneyIcon } from '@/icons/icons';
 import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from '@/components/form/dropdown';
@@ -55,6 +55,10 @@ export default function Home() {
   const [productLessSale, setProductLessSale] = useState<ProductReportProps[]>([]);
   const [selectedType, setSelectedType] = useState<number>(0);
   const [totalInventory, setTotalInventory] = useState<TotalInventoryProps>();
+  const [predictionData, setPredictionData] = useState<PredictionDataProps>();
+  const [paretoData, setParetoData] = useState<ParetoDataProps[]>([]);
+  const [topClients, setTopClients] = useState<TopClientsProps[]>([]);
+  const [salePrediction, setSalePrediction] = useState<number>();
   const [typeReportTotals, setTypeReportTotals] = useState([
     { name: 'Ventas totales', value: 0 },
     { name: 'Pedidos', value: 0 },
@@ -85,6 +89,38 @@ export default function Home() {
   }, [selectedStoreHouse])
 
   useEffect(() => {
+    const handlePredictionData = async () => {
+      await fetch("https://wheelshop-api.onrender.com/dashboard/tendencia?desde=2025-01-01&hasta=2026-06-04")
+        .then((response) => response.json())
+        .then((data) => {
+          setPredictionData(data);
+        });
+    }
+
+    const handleParetoData = async () => {
+      await fetch("https://wheelshop-api.onrender.com/dashboard/pareto-productos?desde=2025-01-01&hasta=2026-06-04")
+        .then((response) => response.json())
+        .then((data) => {
+          setParetoData(data);
+        });
+    }
+
+    const handleTopClientsData = async () => {
+      await fetch("https://wheelshop-api.onrender.com/dashboard/top-clientes-productos")
+        .then((response) => response.json())
+        .then((data) => {
+          setTopClients(data);
+        });
+    }
+
+    const handleSalePredictionData = async () => {
+      await fetch("https://wheelshop-api.onrender.com/dashboard/prediccion-random-forest")
+        .then((response) => response.json())
+        .then((data) => {
+          setSalePrediction(data.prediccion);
+        });
+    }
+
     const fetchReport = async () => {
       const { data, error } = await supabase
         .rpc('get_totals_grouped_by_type', {
@@ -128,10 +164,22 @@ export default function Home() {
 
       setProductLessSale(data);
     }
+
     fetchReport();
     handleLoadMostProduct()
     handleLoadLessProduct();
+    handlePredictionData();
+    handleParetoData();
+    handleTopClientsData();
+    handleSalePredictionData();
   }, [startDate, endDate]);
+
+  const HEADERS = [
+    { label: "Cliente", className: "px-2 py-3 w-[30%]" },
+    { label: "Producto", className: "px-2 py-3 w-[40%]" },
+    { label: "Monto", className: "px-2 py-3 text-right" },
+    { label: "Total", className: "px-2 py-3 text-right" },
+  ]
 
   const selectedDataKey = ['sale', 'purchase', 'expense', 'return', 'comissions'][selectedType] as keyof TotalsGroupedByType;
 
@@ -156,16 +204,6 @@ export default function Home() {
     {
       name: 'Productos más vendidos',
       data: productMostSale.map((product) => ({
-        key: product.name,
-        value: product.totalAmountSold,
-      })),
-    },
-  ];
-
-  const productLessSaleData = [
-    {
-      name: 'Productos menos vendidos',
-      data: productLessSale.map((product) => ({
         key: product.name,
         value: product.totalAmountSold,
       })),
@@ -244,6 +282,14 @@ export default function Home() {
                     {currencyFormatter(totalInventory?.total ?? 0)}
                   </span>
                 </div>
+                <div className="hover:bg-[#f7f7f7] flex flex-col rounded-md px-4 py-2 text-secondary/80 md:text-2xs text-base font-[550] bg-white flex-1 min-w-[200px]">
+                  <span className="text-secondary w-fit border-b border-dotted border-gray-300 font-medium md:text-2xs text-base">
+                    Predicción de ventas
+                  </span>
+                  <span className="text-secondary font-medium md:text-2xs text-base">
+                    {currencyFormatter(salePrediction ?? 0)}
+                  </span>
+                </div>
               </div>
             </div>
           </FormSection>
@@ -306,11 +352,42 @@ export default function Home() {
                 }}
               />
             </FormSection>
-            <FormSection className='md:w-1/2 w-full' name='Productos menos vendidos' classNameLabel='mb-10'>
+            <FormSection className='md:w-1/2 w-full' name='Acumulado de productos (pareto)' classNameLabel='mb-10'>
               <BarChart
                 theme="light"
                 isAnimated
-                data={productLessSaleData}
+                data={paretoData.slice(0, 10).map(({ producto, acumulado }) => ({
+                  name: producto,
+                  data: [{ key: 'Ventas', value: Number(acumulado) }],
+                }))}
+                showLegend
+                tooltipOptions={{
+                  valueFormatter: (v) => (v != null ? `${v} acmld` : ''),
+                }}
+                xAxisOptions={{
+                  labelFormatter: (v) => (v != null ? String(v) : ''),
+                }}
+                yAxisOptions={{
+                  labelFormatter: (v) => (v != null ? `${v} acmld` : ''),
+                }}
+              />
+            </FormSection>
+          </div>
+
+          {predictionData &&
+            <FormSection name='Analisis de tendencia' classNameLabel='mb-10'>
+              <LineChart
+                theme="light"
+                isAnimated
+                data={[
+                  {
+                    name: predictionData.tendencia.toUpperCase(),
+                    data: predictionData.data.map(({ mes, ventas }) => ({
+                      key: formatDateKey(mes),
+                      value: Number(ventas),
+                    })),
+                  },
+                ]}
                 showLegend
                 tooltipOptions={{
                   valueFormatter: (v) => (v != null ? currencyFormatter(v) : ''),
@@ -323,7 +400,36 @@ export default function Home() {
                 }}
               />
             </FormSection>
-          </div>
+          }
+
+          <FormSection name='Mejores clientes '>
+            <div className="relative overflow-x-auto my-2 px-px md:block hidden">
+              <table className="w-full text-left">
+                <thead className="text-primary px-4 font-semibold text-2xs border-b border-gray-300">
+                  <tr>
+                    {HEADERS.map((th, index) => (
+                      <th key={index} className={th.className}>
+                        {th.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {topClients && topClients.map(({ cliente, total, producto_favorito, monto_producto }, key) => (
+                    <tr
+                      key={key}
+                      className={`text-2xs font-medium text-secondary/80 ${key !== topClients.length - 1 ? 'border-b border-gray-300' : 'border-0'}`}
+                    >
+                      <td className="px-2 py-4">{cliente}</td>
+                      <td className="px-2 py-4">{producto_favorito}</td>
+                      <td className="px-2 py-4 text-right">{currencyFormatter(monto_producto)}</td>
+                      <td className="px-2 py-4 text-right">{currencyFormatter(total)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FormSection>
         </div>
       ) : (
         <AccessPage />

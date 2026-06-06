@@ -45,7 +45,7 @@ export default function ReportTable({ reports, setReports }: ReportTableProps) {
     endDate: new Date(),
   });
 
-const ReportName = {
+  const ReportName = {
     MonthlySales: 'Ventas mensuales',
     MonthlyGrossSales: 'Ventas brutas mensuales',
     MonthlyTireSales: 'Ventas de llantas mensuales',
@@ -58,7 +58,7 @@ const ReportName = {
     InventoryMoney: 'Inventario final monetario',
     InventoryMoneyByStore: 'Inventario final monetario por bodega',
   } as const;
-  
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 

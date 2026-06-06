@@ -86,6 +86,7 @@ export default function TransferSearch({ setTextSearch, textSearch, isSearching,
           selectedFilters={selectedFilters}
           handleChangeSelectedFilters={handleChangeSelectedFilters}
           setIsSearching={setIsSearching}
+          setTextSearch={setTextSearch}
           setTextSearch={setTextSearch}          
           setTransfers={setTransfers}
           SORT_TRANSFER={SORT_TRANSFER}
