@@ -1,7 +1,7 @@
-import { TransferProps } from "@/types/types";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import TransferSegmentSearch from "./transfer-segment-search";
-import TransferSort from "./transfer-sort";
+import { TransferProps } from '@/types/types';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import TransferSegmentSearch from './transfer-segment-search';
+import TransferSort from './transfer-sort';
 
 interface TransferSearchProps {
   transfers: TransferProps[];
@@ -17,18 +17,33 @@ interface SelectedFilters {
   typeSort: 'recent' | 'ancient';
 }
 
-
-export default function TransferSearch({ setTextSearch, textSearch, isSearching, setTransfers, transfers, setIsSearching }: TransferSearchProps) {
+export default function TransferSearch({
+  setTextSearch,
+  textSearch,
+  isSearching,
+  setTransfers,
+  transfers,
+  setIsSearching,
+}: TransferSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const SORT_TRANSFER = ["Nombre del usuario", "Creado", "Codigo de transferencia", "Origen", "Destino"];
+  const SORT_TRANSFER = [
+    'Nombre del usuario',
+    'Creado',
+    'Codigo de transferencia',
+    'Origen',
+    'Destino',
+  ];
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({
     segments: 0,
-    sorts: "Nombre del usuario",
-    typeSort: 'recent'
+    sorts: 'Nombre del usuario',
+    typeSort: 'recent',
   });
 
-  const handleChangeSelectedFilters = (name: keyof typeof selectedFilters, value: number | string) => {
+  const handleChangeSelectedFilters = (
+    name: keyof typeof selectedFilters,
+    value: number | string,
+  ) => {
     setSelectedFilters((prev) => {
       const newFilters = { ...prev, [name]: value };
       sortTransfer(newFilters.sorts, newFilters.typeSort);
@@ -41,11 +56,13 @@ export default function TransferSearch({ setTextSearch, textSearch, isSearching,
     inputRef.current?.focus();
   }, [isSearching]);
 
-
   const sortTransfer = (field: string, direction: 'recent' | 'ancient') => {
     const sortIndex = SORT_TRANSFER.indexOf(field);
 
-    const comparisonFunctions: ((a: TransferProps, b: TransferProps) => number)[] = [
+    const comparisonFunctions: ((
+      a: TransferProps,
+      b: TransferProps,
+    ) => number)[] = [
       (a, b) => a.email.localeCompare(b.email),
       (a, b) => {
         const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
@@ -70,7 +87,9 @@ export default function TransferSearch({ setTextSearch, textSearch, isSearching,
 
   return (
     <>
-      <div className={`flex items-center justify-between px-2 py-2 bg-white space-x-6 ${isSearching ? 'border-b' : 'border-b-0'} border-gray-300`}>
+      <div
+        className={`flex items-center justify-between px-2 py-2 bg-white space-x-6 ${isSearching ? 'border-b' : 'border-b-0'} border-gray-300`}
+      >
         <TransferSegmentSearch
           inputRef={inputRef}
           isSearching={isSearching}
@@ -87,11 +106,10 @@ export default function TransferSearch({ setTextSearch, textSearch, isSearching,
           handleChangeSelectedFilters={handleChangeSelectedFilters}
           setIsSearching={setIsSearching}
           setTextSearch={setTextSearch}
-          setTextSearch={setTextSearch}          
           setTransfers={setTransfers}
           SORT_TRANSFER={SORT_TRANSFER}
         />
       </div>
     </>
-  )
+  );
 }
