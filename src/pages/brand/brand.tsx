@@ -8,19 +8,22 @@ import BrandHeader from './brand-header';
 import BrandSearch from './brand-search';
 import BrandFilters from './brand-filters';
 
-
 export default function Brand() {
   const [isSearch, setIsSearch] = useState(false);
   const [brands, setBrands] = useState<BrandProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [totalBrands, setTotalBrands] = useState<number>(0);
-  const [textSearch, setTextSearch] = useState<string>("");
+  const [textSearch, setTextSearch] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const pageSize = 15;
   const brandRef = useRef<BrandProps[]>([]);
-  const [selectedBrandToEdit, setSelectedBrandToEdit] = useState<BrandProps | null>(null);
+  const [selectedBrandToEdit, setSelectedBrandToEdit] =
+    useState<BrandProps | null>(null);
   const [selectedBrandIds, setSelectedBrandIds] = useState<BrandProps[]>([]);
-  const [filters, setFilters] = useState<{ category: string | null; state: string | null }>({
+  const [filters, setFilters] = useState<{
+    category: string | null;
+    state: string | null;
+  }>({
     category: null as string | null,
     state: null as string | null,
   });
@@ -37,15 +40,15 @@ export default function Brand() {
 
     // 🔹 aplicar filtros
     if (filters.category) {
-      query = query.eq("category", filters.category);
+      query = query.eq('category', filters.category);
     }
 
     if (filters.state) {
-      const isActive = filters.state === "Activo";
-      query = query.eq("state", isActive);
+      const isActive = filters.state === 'Activo';
+      query = query.eq('state', isActive);
     }
 
-    // 🔹 aplicar búsqueda
+    //aplicar búsqueda
     if (textSearch.trim().length > 0) {
       const tokens = textSearch.toLowerCase().trim().split(/\s+/);
 
@@ -75,11 +78,22 @@ export default function Brand() {
   };
 
   const handleUpdateLocalBrand = (updatedBrand: BrandProps) => {
-    console.log(updatedBrand)
-    setBrands(prev => {
-      const updated = prev.some(b => b.brandId === updatedBrand.brandId)
-        ? prev.map(b => b.brandId === updatedBrand.brandId ? updatedBrand : b)
-        : [{ brandName: updatedBrand.brandName, brandId: updatedBrand.brandId, state: updatedBrand.state, category: updatedBrand.category, createdAt: new Date }, ...prev];
+    console.log(updatedBrand);
+    setBrands((prev) => {
+      const updated = prev.some((b) => b.brandId === updatedBrand.brandId)
+        ? prev.map((b) =>
+            b.brandId === updatedBrand.brandId ? updatedBrand : b,
+          )
+        : [
+            {
+              brandName: updatedBrand.brandName,
+              brandId: updatedBrand.brandId,
+              state: updatedBrand.state,
+              category: updatedBrand.category,
+              createdAt: new Date(),
+            },
+            ...prev,
+          ];
 
       brandRef.current = updated;
       return updated;
@@ -93,7 +107,8 @@ export default function Brand() {
           setSelectedBrandToEdit={setSelectedBrandToEdit}
           onUpdateLocalBrand={handleUpdateLocalBrand}
           clearSelection={clearSelectedBrands}
-        />        <div className="relative overflow-x-auto shadow-sm border border-gray-300 md:rounded-xl">
+        />{' '}
+        <div className="relative overflow-x-auto shadow-sm border border-gray-300 md:rounded-xl">
           <BrandSearch
             textSearch={textSearch}
             setTextSearch={setTextSearch}
@@ -102,12 +117,26 @@ export default function Brand() {
             isSearching={isSearch}
             setIsSearching={setIsSearch}
           />
-          <BrandFilters isSearching={isSearch} filters={filters} setFilters={setFilters} />
-          <BrandTable brands={brands} setBrands={setBrands} isLoading={isLoading} setSelectedBrandToEdit={setSelectedBrandToEdit} selectedBrandIds={selectedBrandIds} setSelectedBrandIds={setSelectedBrandIds} />
-          <TablePagination totalPages={totalPages} page={page} setPage={setPage} />
+          <BrandFilters
+            isSearching={isSearch}
+            filters={filters}
+            setFilters={setFilters}
+          />
+          <BrandTable
+            brands={brands}
+            setBrands={setBrands}
+            isLoading={isLoading}
+            setSelectedBrandToEdit={setSelectedBrandToEdit}
+            selectedBrandIds={selectedBrandIds}
+            setSelectedBrandIds={setSelectedBrandIds}
+          />
+          <TablePagination
+            totalPages={totalPages}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       </>
-    </Container >
+    </Container>
   );
 }
-

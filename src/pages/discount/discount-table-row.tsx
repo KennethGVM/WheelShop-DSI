@@ -15,7 +15,6 @@ interface DiscountTableRowProps {
 }
 
 export default function DiscountTableRow({ isScrolled, discounts, discount, handleEditDiscount, selectedDiscountIds, setSelectedDiscountIds, setSelectAll }: DiscountTableRowProps) {
-  const isMobile = window.innerWidth <= 768;
   const handleSelectProduct = (discountId: DiscountProps, checked: boolean) => {
     let newSelectedIds;
 

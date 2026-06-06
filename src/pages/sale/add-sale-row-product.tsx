@@ -32,9 +32,9 @@ interface SaleRowProductProps {
   updateDiscountForProductId: (productId: string, discount: number) => void
   isQuotation: boolean
   stateQuotation: boolean
-  total: number
-  productCount: number
-  onDiscountApplied: (discountId: string | null) => void;
+  total?: number
+  productCount?: number 
+  onDiscountApplied?: (discountId: string | null) => void;
 
 }
 
@@ -57,9 +57,9 @@ export default function AddSaleRowProduct({
   updateDiscountForProductId,
   isQuotation,
   stateQuotation,
-  total,
-  productCount,
-  onDiscountApplied,
+  total = 0,
+  productCount = 0,
+  onDiscountApplied = () => {},
 }: SaleRowProductProps) {
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
   const [newPrice, setNewPrice] = useState<number | null>(null);
