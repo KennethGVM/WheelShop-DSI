@@ -3,7 +3,7 @@ import { PlusCircleIcon } from "@/icons/icons";
 import FormSection from "@/layout/form-section";
 import ProductModalSale from "../product/product-modal-sale";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ReturnProps, SelectedProducts } from "@/types/types";
+import { SelectedProducts } from "@/types/types";
 import AddSaleRowProduct from "../sale/add-sale-row-product";
 
 interface ReturnChangeProductsProps {
@@ -20,8 +20,6 @@ export default function ReturnChangeProducts({ isModalOpen, handleChangeShowModa
     { label: "Cantidad", className: "px-2 py-3 'text-right'}" },
     { label: "Total", className: "text-right pr-20" },
   ]
-  const [returns, setReturns] = useState<ReturnProps[]>([])
-  const [adjustedQuantity, setAdjustedQuantity] = useState(0)
 
   const handleCloseModal = () => {
     handleChangeShowModal('products', false)
@@ -80,6 +78,10 @@ export default function ReturnChangeProducts({ isModalOpen, handleChangeShowModa
                       index,
                     ) => (
                       <AddSaleRowProduct
+                        productCount={0}
+                        total={0}
+                        saleId=""
+                        onDiscountApplied={() => { }}
                         key={index}
                         price={Number(price) || 0}
                         index={index}
@@ -93,14 +95,13 @@ export default function ReturnChangeProducts({ isModalOpen, handleChangeShowModa
                         supplierId={supplierId}
                         nameSupplier={nameSupplier}
                         isMobile={false}
-                        returns={returns}
-                        adjustedQuantity={adjustedQuantity}
+                        returns={[]}
+                        adjustedQuantity={0}
                         productId={productId}
                         updateDiscountForProductId={updateDiscountForProductId}
                         productSupplierId={productSupplierId}
                         isQuotation={false}
                         stateQuotation={false}
-
                       />
                     ),
                   )}
@@ -115,6 +116,10 @@ export default function ReturnChangeProducts({ isModalOpen, handleChangeShowModa
                   index,
                 ) => (
                   <AddSaleRowProduct
+                    productCount={0}
+                    total={0}
+                    saleId=""
+                    onDiscountApplied={() => { }}
                     key={index}
                     price={Number(price) || 0}
                     index={index}
@@ -128,8 +133,8 @@ export default function ReturnChangeProducts({ isModalOpen, handleChangeShowModa
                     supplierId={supplierId}
                     nameSupplier={nameSupplier}
                     isMobile={true}
-                    returns={returns}
-                    adjustedQuantity={adjustedQuantity}
+                    returns={[]}
+                    adjustedQuantity={0}
                     productId={productId}
                     updateDiscountForProductId={updateDiscountForProductId}
                     productSupplierId={productSupplierId}

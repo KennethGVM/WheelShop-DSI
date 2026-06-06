@@ -344,6 +344,27 @@ export interface TotalInventoryProps {
   total: number;
 }
 
+export interface PredictionDataProps {
+  data: {
+    mes: string;
+    ventas: number;
+  }[]
+  tendencia: string;
+}
+
+export interface ParetoDataProps {
+  producto: string;
+  ventas: number;
+  acumulado: number;
+}
+
+export interface TopClientsProps {
+  cliente: string;
+  total: number;
+  producto_favorito: string;
+  monto_producto: number;
+}
+
 export interface TransferReportProps {
   codeTransfer: string;
   origin: string;
