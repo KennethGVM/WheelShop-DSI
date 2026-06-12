@@ -313,7 +313,7 @@ export default function GlobalSearchModal({ onClose, modalRef }: GlobalSearchMod
       ) : (
         <div className="flex flex-col items-center justify-center py-7 mt-4 text-center">
           <SearchIcon className="size-14 text-[#a5a5a5]" />
-          <p className="text-[15px] font-medium text-secondary/80">Busca cualquier cosa en WHEELSHOP</p>
+          <p className="text-[15px] font-medium text-secondary/80">Busca cualquier cosa en HMC LLantas</p>
         </div>
       )}
     </div>
