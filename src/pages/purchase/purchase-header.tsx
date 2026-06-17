@@ -6,8 +6,15 @@ import FieldSelect from '@/components/form/field-select';
 import DropDownSelector from '@/components/form/dropdown-selector';
 import Modal from '@/components/modal';
 import FieldInput from '@/components/form/field-input';
-import { CurrencyProps, PaymentMethodProps, PurchaseProps, SelectedProducts, SupplierProps } from '@/types/types';
+import {
+  CurrencyProps,
+  PaymentMethodProps,
+  PurchaseProps,
+  SelectedProducts,
+  SupplierProps,
+} from '@/types/types';
 import { showToast } from '@/components/toast';
+import { formatNicaraguanPhone } from '@/lib/utils/formatters';
 
 interface DropdownItemType {
   name: string;
@@ -16,21 +23,64 @@ interface DropdownItemType {
 
 interface PurchaseHeaderProps {
   isEditing: boolean;
-  setFormData: Dispatch<SetStateAction<Omit<PurchaseProps, 'purchaseOrderId' | 'nameSupplier' | 'namestorehouse' | 'namePaymentMethod' | 'products'>>>;
+  setFormData: Dispatch<
+    SetStateAction<
+      Omit<
+        PurchaseProps,
+        | 'purchaseOrderId'
+        | 'nameSupplier'
+        | 'namestorehouse'
+        | 'namePaymentMethod'
+        | 'products'
+      >
+    >
+  >;
   currencies: CurrencyProps[];
   paymentMethod: PaymentMethodProps[];
   setPaymentMethod: Dispatch<SetStateAction<PaymentMethodProps[]>>;
   setProducts: Dispatch<SetStateAction<SelectedProducts[]>>;
   setSuppliers: Dispatch<SetStateAction<SupplierProps[]>>;
   suppliers: SupplierProps[];
-  formData: Omit<PurchaseProps, 'createdAt' | 'purchaseOrderId' | 'nameSupplier' | 'namestorehouse' | 'namePaymentMethod' | 'products'>;
-  handleChangeFormData: (name: keyof Omit<PurchaseProps, 'createdAt' | 'purchaseOrderId' | 'nameSupplier' | 'namestorehouse' | 'namePaymentMethod' | 'products'>, value: string | number | Date) => void;
+  formData: Omit<
+    PurchaseProps,
+    | 'createdAt'
+    | 'purchaseOrderId'
+    | 'nameSupplier'
+    | 'namestorehouse'
+    | 'namePaymentMethod'
+    | 'products'
+  >;
+  handleChangeFormData: (
+    name: keyof Omit<
+      PurchaseProps,
+      | 'createdAt'
+      | 'purchaseOrderId'
+      | 'nameSupplier'
+      | 'namestorehouse'
+      | 'namePaymentMethod'
+      | 'products'
+    >,
+    value: string | number | Date,
+  ) => void;
 }
 
-export default function PurchaseHeader({ setSuppliers, suppliers, paymentMethod, setPaymentMethod, setFormData, currencies, formData, handleChangeFormData, setProducts, isEditing }: PurchaseHeaderProps) {
+export default function PurchaseHeader({
+  setSuppliers,
+  suppliers,
+  paymentMethod,
+  setPaymentMethod,
+  setFormData,
+  currencies,
+  formData,
+  handleChangeFormData,
+  setProducts,
+  isEditing,
+}: PurchaseHeaderProps) {
   const [storeHouse, setStoreHouse] = useState<DropdownItemType[]>([]);
-  const [isShowModal, setIsShowModal] = useState<boolean>(false)
-  const [formDataSupplier, setFormDataSupplier] = useState<Omit<SupplierProps, 'supplierId' | 'createdAt' | 'state'>>({
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [formDataSupplier, setFormDataSupplier] = useState<
+    Omit<SupplierProps, 'supplierId' | 'createdAt' | 'state'>
+  >({
     nameSupplier: '',
     ruc: '',
     socialReason: '',
@@ -38,25 +88,41 @@ export default function PurchaseHeader({ setSuppliers, suppliers, paymentMethod,
     email: '',
   });
 
-  const handleChangeFormDataSupplier = (name: keyof typeof formDataSupplier, value: string) => {
+  const handleChangeFormDataSupplier = (
+    name: keyof typeof formDataSupplier,
+    value: string,
+  ) => {
     setFormDataSupplier((prev) => ({ ...prev, [name]: value }));
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: paymentData } = await supabase.from('paymentMethod').select('*');
+      const { data: paymentData } = await supabase
+        .from('paymentMethod')
+        .select('*');
       const data = paymentData as PaymentMethodProps[];
       setPaymentMethod(data);
 
-      const { data: supplierData } = await supabase.from('supplier').select('*');
+      const { data: supplierData } = await supabase
+        .from('supplier')
+        .select('*');
       setSuppliers(supplierData as SupplierProps[]);
 
-      const { data: storeHouseData } = await supabase.from('getstorehouse').select('*');
-      setStoreHouse(storeHouseData?.map(sh => ({ name: sh.name, value: sh.storeHouseId })) || []);
-
+      const { data: storeHouseData } = await supabase
+        .from('getstorehouse')
+        .select('*');
+      setStoreHouse(
+        storeHouseData?.map((sh) => ({
+          name: sh.name,
+          value: sh.storeHouseId,
+        })) || [],
+      );
 
       if (!isEditing) {
-        setFormData(prev => ({ ...prev, paymentMethodId: paymentData?.[0].paymentMethodId }));
+        setFormData((prev) => ({
+          ...prev,
+          paymentMethodId: paymentData?.[0].paymentMethodId,
+        }));
       }
     };
 
@@ -64,23 +130,35 @@ export default function PurchaseHeader({ setSuppliers, suppliers, paymentMethod,
   }, []);
 
   const handleSubmitSupplier = async () => {
-    const { data, error } = await supabase.from('supplier').insert({
-      nameSupplier: formDataSupplier.nameSupplier,
-      ruc: formDataSupplier.ruc,
-      socialReason: formDataSupplier.socialReason,
-      phone: formDataSupplier.phone,
-      email: formDataSupplier.email,
-    }).select();
+    const { data, error } = await supabase
+      .from('supplier')
+      .insert({
+        nameSupplier: formDataSupplier.nameSupplier,
+        ruc: formDataSupplier.ruc,
+        socialReason: formDataSupplier.socialReason,
+        phone: formDataSupplier.phone,
+        email: formDataSupplier.email,
+      })
+      .select();
 
     if (error) {
       showToast(error.message, false);
     } else {
       showToast('Proveedor creado', true);
-      const newSupplier: SupplierProps = { createdAt: new Date(), state: true, nameSupplier: formDataSupplier.nameSupplier, email: formDataSupplier.email, phone: formDataSupplier.phone, ruc: formDataSupplier.ruc, socialReason: formDataSupplier.socialReason, supplierId: data[0].supplierId }
-      setSuppliers([...suppliers, newSupplier])
+      const newSupplier: SupplierProps = {
+        createdAt: new Date(),
+        state: true,
+        nameSupplier: formDataSupplier.nameSupplier,
+        email: formDataSupplier.email,
+        phone: formDataSupplier.phone,
+        ruc: formDataSupplier.ruc,
+        socialReason: formDataSupplier.socialReason,
+        supplierId: data[0].supplierId,
+      };
+      setSuppliers([...suppliers, newSupplier]);
       setIsShowModal(false);
     }
-  }
+  };
 
   return (
     <FormSection className="px-0 pt-0">
@@ -88,52 +166,77 @@ export default function PurchaseHeader({ setSuppliers, suppliers, paymentMethod,
         <div className="flex md:flex-row flex-col items-center [&>div]:py-5 [&>div]:px-4">
           <DropDownSelector
             name="Distribuidor"
-            className='md:border-r'
-            items={suppliers.map(s => ({ name: s.nameSupplier, value: s.supplierId }))}
+            className="md:border-r"
+            items={suppliers.map((s) => ({
+              name: s.nameSupplier,
+              value: s.supplierId,
+            }))}
             value={formData.supplierId}
             disabled={formData.state === 1}
             onClick={() => setIsShowModal(true)}
-            onChange={(value) => { handleChangeFormData('supplierId', value); setProducts([]) }}
+            onChange={(value) => {
+              handleChangeFormData('supplierId', value);
+              setProducts([]);
+            }}
           />
-          {isShowModal &&
-            <Modal onClickSave={handleSubmitSupplier} name='Nuevo proveedor' principalButtonName='Guardar' onClose={() => setIsShowModal(false)} >
-              <div className='[&>div]:mb-3 px-4 py-3'>
+          {isShowModal && (
+            <Modal
+              onClickSave={handleSubmitSupplier}
+              name="Nuevo proveedor"
+              principalButtonName="Guardar"
+              onClose={() => setIsShowModal(false)}
+            >
+              <div className="[&>div]:mb-3 px-4 py-3">
                 <FieldInput
                   name="Nombre"
-                  id='name'
+                  id="name"
                   value={formDataSupplier.nameSupplier}
-                  onChange={(e) => handleChangeFormDataSupplier('nameSupplier', e.target.value)}
+                  onChange={(e) =>
+                    handleChangeFormDataSupplier('nameSupplier', e.target.value)
+                  }
                 />
                 <FieldInput
                   name="Razón social"
-                  id='socialReason'
+                  id="socialReason"
                   value={formDataSupplier.socialReason}
-                  onChange={(e) => handleChangeFormDataSupplier('socialReason', e.target.value)}
+                  onChange={(e) =>
+                    handleChangeFormDataSupplier('socialReason', e.target.value)
+                  }
                 />
                 <FieldInput
                   name="RUC"
-                  id='ruc'
+                  id="ruc"
                   value={formDataSupplier.ruc}
-                  onChange={(e) => handleChangeFormDataSupplier('ruc', e.target.value)}
+                  onChange={(e) =>
+                    handleChangeFormDataSupplier('ruc', e.target.value)
+                  }
                 />
 
-                <div className='flex items-center space-x-2 [&>div]:w-full [&>div]:mb-0'>
+                <div className="flex items-center space-x-2 [&>div]:w-full [&>div]:mb-0">
                   <FieldInput
                     name="Teléfono"
-                    id='phone'
+                    id="phone"
+                    maxLength={14}
                     value={formDataSupplier.phone}
-                    onChange={(e) => handleChangeFormDataSupplier('phone', e.target.value)}
+                    onChange={(e) => {
+                      const formattedPhone = formatNicaraguanPhone(
+                        e.target.value,
+                      );
+                      handleChangeFormDataSupplier('phone', formattedPhone);
+                    }}
                   />
                   <FieldInput
                     name="Email"
-                    id='email'
+                    id="email"
                     value={formDataSupplier.email}
-                    onChange={(e) => handleChangeFormDataSupplier('email', e.target.value)}
+                    onChange={(e) =>
+                      handleChangeFormDataSupplier('email', e.target.value)
+                    }
                   />
                 </div>
               </div>
             </Modal>
-          }
+          )}
 
           <DropDownSelector
             name="Destino"
@@ -148,14 +251,22 @@ export default function PurchaseHeader({ setSuppliers, suppliers, paymentMethod,
           <FieldSelect
             id="paymentMethod"
             name="Términos de pago (opcional)"
-            options={paymentMethod.map(pm => ({ name: pm.namePaymentMethod, value: pm.paymentMethodId }))}
+            options={paymentMethod.map((pm) => ({
+              name: pm.namePaymentMethod,
+              value: pm.paymentMethodId,
+            }))}
             value={formData.paymentMethodId}
             disabled={formData.state === 1}
-            onChange={(e) => handleChangeFormData('paymentMethodId', e.target.value)}
+            onChange={(e) =>
+              handleChangeFormData('paymentMethodId', e.target.value)
+            }
           />
           <FieldSelect
             name="Moneda del distribuidor"
-            options={currencies.map(cr => ({ name: cr.currencyName, value: cr.currencyId }))}
+            options={currencies.map((cr) => ({
+              name: cr.currencyName,
+              value: cr.currencyId,
+            }))}
             value={formData.currencyId}
             onChange={(e) => handleChangeFormData('currencyId', e.target.value)}
             disabled={formData.state === 1}

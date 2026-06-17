@@ -108,7 +108,7 @@ export default function Home() {
   useEffect(() => {
     const handlePredictionData = async () => {
       await fetch(
-        'https://wheelshop-api.onrender.com/dashboard/tendencia?desde=2025-01-01&hasta=2026-06-04',
+        'https://wheel-shop-api.vercel.app/dashboard/tendencia?desde=2025-01-01&hasta=2026-06-04',
       )
         .then((response) => response.json())
         .then((data) => {
@@ -118,7 +118,7 @@ export default function Home() {
 
     const handleParetoData = async () => {
       await fetch(
-        'https://wheelshop-api.onrender.com/dashboard/pareto-productos?desde=2025-01-01&hasta=2026-06-04',
+        'https://wheel-shop-api.vercel.app/dashboard/pareto-productos?desde=2025-01-01&hasta=2026-06-04',
       )
         .then((response) => response.json())
         .then((data) => {
@@ -128,7 +128,7 @@ export default function Home() {
 
     const handleTopClientsData = async () => {
       await fetch(
-        'https://wheelshop-api.onrender.com/dashboard/top-clientes-productos',
+        'https://wheel-shop-api.vercel.app/dashboard/top-clientes-productos',
       )
         .then((response) => response.json())
         .then((data) => {
@@ -138,7 +138,7 @@ export default function Home() {
 
     const handleSalePredictionData = async () => {
       await fetch(
-        'https://wheelshop-api.onrender.com/dashboard/prediccion-random-forest',
+        'https://wheel-shop-api.vercel.app/dashboard/prediccion-random-forest',
       )
         .then((response) => response.json())
         .then((data) => {
