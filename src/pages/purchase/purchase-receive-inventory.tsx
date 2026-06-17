@@ -184,22 +184,18 @@ export default function PurchaseReceiveInventory() {
         }
       }
 
-      // 2. NUEVA LÓGICA: ACTUALIZACIÓN DE PRECIOS Y COSTOS
-      // Solo actualizamos si se aceptó al menos 1 unidad (se ignora si todo fue rechazado)
+
       if (product.accepted > 0) {
-        // Buscamos el costo con el que se ordenó este producto en específico
         const productInForm = formData.products.find(
           (p) => p.productId === product.productId,
         );
         const currentCost = productInForm ? Number(productInForm.cost) : 0;
 
         if (currentCost > 0) {
-          // Calculamos los nuevos precios basados en las reglas de negocio
           const minPrice = Number((currentCost * 1.15).toFixed(2));
           const price = Number((currentCost * 1.2).toFixed(2));
           const suggestedPrice = Number((currentCost * 1.4).toFixed(2));
 
-          // Actualizamos la tabla productSupplier
           const { error: updateCostError } = await supabase
             .from('productSupplier')
             .update({
@@ -208,7 +204,7 @@ export default function PurchaseReceiveInventory() {
               price: price,
               suggestedPrice: suggestedPrice,
             })
-            .eq('productSupplierId', product.productId); // En tu estado productStatus, 'productId' guarda el productSupplierId
+            .eq('productSupplierId', product.productId); 
 
           if (updateCostError) {
             showToast(
