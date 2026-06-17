@@ -10,6 +10,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import GeneralInformationCustomer from "./general-information-customer";
 import CustomerAddress from "./customer-address";
+import { formatNicaraguanPhone, validateEmailFormat } from "@/lib/utils/formatters";
 
 const validateNicaraguanCedula = (cedula: string): { isValid: boolean; message?: string } => {
   const cedulaRegex = /^\d{3}-\d{6}-\d{4}[A-Z]$/;
@@ -216,6 +217,13 @@ export default function AddCustomer() {
       return;
     }
 
+    if (formData.email && formData.email.trim() !== '') {
+      if (!validateEmailFormat(formData.email.trim())) {
+        showToast('El correo electrónico no tiene un formato válido.', false);
+        return; // Detiene la ejecución
+      }
+    }
+
     const validations = [
       { field: 'dni', message: 'Ya existe un cliente con esta identificación.' },
       { field: 'email', message: 'Ya existe un cliente con este correo.' },
@@ -315,8 +323,16 @@ export default function AddCustomer() {
                   <>
                     <FieldInput value={formData.email} onChange={(e) =>
                       handleChangeFormState('email', e.target.value)} name='Correo' id='email' className='mb-5' placeholder="Ej: correo@ejemplo.com" />
-                    <FieldInput value={formData.phone} onChange={(e) =>
-                      handleChangeFormState('phone', e.target.value)} name='Telefono' id='phone' />
+                    <FieldInput
+                      name='Telefono'
+                      id='phone'
+                      value={formData.phone}
+                      maxLength={14}
+                      onChange={(e) => {
+                        const formattedPhone = formatNicaraguanPhone(e.target.value);
+                        handleChangeFormState('phone', formattedPhone);
+                      }}
+                    />
                   </>
                 </FormSection>
               </div>

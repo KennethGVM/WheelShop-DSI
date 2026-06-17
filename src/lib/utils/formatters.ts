@@ -20,3 +20,8 @@ export const formatNicaraguanPhone = (value: string): string => {
 
   return `+505 ${digits.slice(0, 4)}-${digits.slice(4)}`;
 };
+
+export const validateEmailFormat = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};

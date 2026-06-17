@@ -29,3 +29,4 @@ export const MONTHS = [
 ]
 
 export const DAYS = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]
+
