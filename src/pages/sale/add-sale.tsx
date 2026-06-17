@@ -27,8 +27,7 @@ type FormDataProps = Omit<SaleProps, 'salesCode' | 'saleId' | 'products' | 'sale
 
 export default function AddSale() {
   const navigate = useNavigate();
-  const { dollarValue = 0 } = useGeneralInformation
-    ();
+  const { dollarValue = 0 } = useGeneralInformation();
   const { saleId } = useParams();
   const [saleCode, setSaleCode] = useState<string>('');
   const [salePaymentDetails, setSalePaymentDetails] = useState<salePaymentDetailProps[]>([]);
@@ -635,7 +634,7 @@ export default function AddSale() {
               ? "Venta sin guardar (Cotización)"
               : "Venta guardada"
     } save={(!isQuotation && saleId) || (isQuotation && formData.stateQuotation == true) || (!isAllowToSale && !isQuotation) || (!isAllowToSale && isQuotation && saleId) ? false : true} onSaveClick={handleFormSubmit} isLoading={isLoading}
-   onClickSecondary={() => navigate(isQuotation ? "/quotations/" : "/sales/")}>
+      onClickSecondary={() => navigate(isQuotation ? "/quotations/" : "/sales/")}>
       {(isAllowToSale && !saleId) || (saleId) || isQuotation ? (
         <>
           {(isQuotation && canCreateQuotation) || (!isQuotation && canCreateSale) ? (

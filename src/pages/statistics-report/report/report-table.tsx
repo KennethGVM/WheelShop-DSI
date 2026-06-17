@@ -218,6 +218,20 @@ export default function ReportTable({ reports, setReports }: ReportTableProps) {
   }, [])
 
   const handlePrint = async () => {
+    const reportsWithoutDates: string[] = [
+      ReportName.EndOfMonthInventory,
+      ReportName.CustomersWithPendingAccounts,
+      ReportName.InventoryMoney,
+      ReportName.InventoryMoneyByStore
+    ];
+
+    if (!reportsWithoutDates.includes(selectedReport)) {
+      if (formData.endDate <= formData.startDate) {
+        showToast('La fecha de fin debe ser mayor a la fecha de inicio', false);
+        return;
+      }
+    }
+
     let report = null;
     if (selectedReport === ReportName.MonthlySales) report = <SalesReport startDate={formData.startDate} endDate={formData.endDate} sales={sales} name='VENTAS DIARIAS' />;
     if (selectedReport === ReportName.MonthlyTireSales) report = <SalesReport startDate={formData.startDate} endDate={formData.endDate} sales={tireSales} name='Ventas DE LLANTAS DIARIAS' />;

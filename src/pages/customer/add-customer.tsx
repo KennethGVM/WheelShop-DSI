@@ -10,6 +10,53 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import GeneralInformationCustomer from "./general-information-customer";
 import CustomerAddress from "./customer-address";
+import { formatNicaraguanPhone, validateEmailFormat } from "@/lib/utils/formatters";
+
+const validateNicaraguanCedula = (cedula: string): { isValid: boolean; message?: string } => {
+  const cedulaRegex = /^\d{3}-\d{6}-\d{4}[A-Z]$/;
+  if (!cedulaRegex.test(cedula)) {
+    return { isValid: false, message: "El formato de la cédula debe ser 000-000000-0000A" };
+  }
+
+  const day = parseInt(cedula.substring(4, 6), 10);
+  const month = parseInt(cedula.substring(6, 8), 10) - 1;
+  const yearShort = parseInt(cedula.substring(8, 10), 10);
+
+  let year = 2000 + yearShort;
+  if (year > 2026) {
+    year = 1900 + yearShort;
+  }
+
+  const birthDate = new Date(year, month, day);
+
+  if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month || birthDate.getDate() !== day) {
+    return { isValid: false, message: "La fecha de nacimiento en la cédula no es una fecha válida." };
+  }
+
+  const today = new Date(2026, 5, 16);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  if (age < 18) {
+    return { isValid: false, message: "El cliente debe ser mayor de edad (mínimo 18 años)." };
+  }
+
+  return { isValid: true };
+};
+
+const validateNicaraguanRuc = (ruc: string): { isValid: boolean; message?: string } => {
+  if (!ruc.startsWith('J')) {
+    return { isValid: false, message: "El RUC debe iniciar con la letra 'J'." };
+  }
+  if (ruc.includes('-')) {
+    return { isValid: false, message: "El RUC no debe contener guiones." };
+  }
+  return { isValid: true };
+};
 
 export default function AddCustomer() {
   const navigate = useNavigate();
@@ -35,8 +82,9 @@ export default function AddCustomer() {
     municipalityId: '',
     departmentName: '',
     municipalityName: '',
+    isNatural: true,
+    identificationType: 0
   };
-
 
   const handleChangeModalData = (name: keyof typeof modalData, value: string) => {
     setModalData((prev) => ({ ...prev, [name]: value }));
@@ -56,7 +104,6 @@ export default function AddCustomer() {
       const { data } = await supabase.from('categoryCustomer').select('*');
       setCategoryCustomer(data as CategoryCustomerProps[]);
     }
-
     handleLoadCategoryCustomers();
   }, [])
 
@@ -65,7 +112,6 @@ export default function AddCustomer() {
       const { data } = await supabase.from('department').select('*');
       setDepartments(data as DepartmetProps[]);
     }
-
     handleLoadDepartments();
   }, [])
 
@@ -75,7 +121,6 @@ export default function AddCustomer() {
         setMunicipalities([]);
         return;
       }
-
       const { data, error } = await supabase
         .from('municipality')
         .select('*')
@@ -85,10 +130,8 @@ export default function AddCustomer() {
         setMunicipalities(data as MunicipalityProps[]);
       }
     };
-
     handleLoadMunicipalitiesByDepartment();
   }, [formData.departmentId]);
-
 
   useEffect(() => {
     const handleLoadCustomerById = async () => {
@@ -110,20 +153,19 @@ export default function AddCustomer() {
           municipalityId: customerData.municipalityId || '',
           departmentName: customerData.departmentName || '',
           municipalityName: customerData.municipalityName || '',
+          isNatural: customerData.isNatural,
+          identificationType: customerData.identificationType || 0
         });
         const fullAddress = `${customerData.municipalityName || ''}\n${customerData.departmentName || ''}\nNicaragua\n${customerData.address || ''}`
-
         setSavedAddress(fullAddress)
       }
     }
-
     if (customerId) handleLoadCustomerById();
   }, [customerId]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validar campos obligatorios
     if (!formData.customerName.trim()) {
       showToast("El nombre del cliente es obligatorio.", false);
       return;
@@ -139,7 +181,49 @@ export default function AddCustomer() {
       return;
     }
 
-    // Validaciones de unicidad
+    if (!formData.dni || formData.dni.trim() === "") {
+      showToast("La identificación del cliente no puede estar vacía.", false);
+      return;
+    }
+
+    if (formData.identificationType === 0) {
+      const cedulaCheck = validateNicaraguanCedula(formData.dni.trim());
+      if (!cedulaCheck.isValid) {
+        showToast(cedulaCheck.message || "Identificación inválida", false);
+        return;
+      }
+    }
+
+    if (formData.identificationType === 3) {
+      const rucCheck = validateNicaraguanRuc(formData.dni.trim());
+      if (!rucCheck.isValid) {
+        showToast(rucCheck.message || "Identificación inválida", false);
+        return;
+      }
+    }
+
+    if (!formData.departmentId || formData.departmentId.trim() === "") {
+      showToast("El departamento es obligatorio.", false);
+      return;
+    }
+
+    if (!formData.municipalityId || formData.municipalityId.trim() === "") {
+      showToast("El municipio es obligatorio.", false);
+      return;
+    }
+
+    if (!formData.address || formData.address.trim() === "") {
+      showToast("La dirección es obligatoria.", false);
+      return;
+    }
+
+    if (formData.email && formData.email.trim() !== '') {
+      if (!validateEmailFormat(formData.email.trim())) {
+        showToast('El correo electrónico no tiene un formato válido.', false);
+        return; // Detiene la ejecución
+      }
+    }
+
     const validations = [
       { field: 'dni', message: 'Ya existe un cliente con esta identificación.' },
       { field: 'email', message: 'Ya existe un cliente con este correo.' },
@@ -156,7 +240,7 @@ export default function AddCustomer() {
         .eq(field, value.toString().trim());
 
       if (customerId) {
-        query.neq('customerId', customerId); // excluir cliente actual
+        query.neq('customerId', customerId);
       }
 
       const { data, error } = await query;
@@ -178,8 +262,8 @@ export default function AddCustomer() {
       ...rest,
       ...(categoryCustomerId.trim() ? { categoryCustomerId } : {}),
       municipalityId: formData.municipalityId.trim() === "" ? null : formData.municipalityId.trim(),
-
     };
+
     const { error } = customerId
       ? await supabase.from('customer').update(dataToSave).eq('customerId', customerId)
       : await supabase.from('customer').insert(dataToSave);
@@ -192,21 +276,19 @@ export default function AddCustomer() {
     }
   };
 
-
   const handleCleanForm = () => {
-    setFormData(
-      INITIAL_FORM_DATA
-    );
+    setFormData(INITIAL_FORM_DATA);
     setSavedAddress(false);
   };
 
-const handleChangeFormState = (name: keyof typeof formData, value: string | number | boolean) => {
-  setFormData((prevState) => ({ ...prevState, [name]: value }));
-};
+  const handleChangeFormState = (name: keyof typeof formData, value: string | number | boolean) => {
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   const handleFormSubmit = () => {
     formRef.current?.requestSubmit();
   };
+
   return (
     <Container text='Cliente no guardado' save onSaveClick={handleFormSubmit} onClickSecondary={() => navigate("/customers/")}>
       <>
@@ -234,14 +316,23 @@ const handleChangeFormState = (name: keyof typeof formData, value: string | numb
                   formData={formData}
                   savedAddress={savedAddress}
                   setSavedAddress={setSavedAddress}
-                  municipalities={municipalities} />
+                  municipalities={municipalities}
+                />
 
                 <FormSection name='Metodos de contacto'>
                   <>
                     <FieldInput value={formData.email} onChange={(e) =>
                       handleChangeFormState('email', e.target.value)} name='Correo' id='email' className='mb-5' placeholder="Ej: correo@ejemplo.com" />
-                    <FieldInput value={formData.phone} onChange={(e) =>
-                      handleChangeFormState('phone', e.target.value)} name='Telefono' id='phone' />
+                    <FieldInput
+                      name='Telefono'
+                      id='phone'
+                      value={formData.phone}
+                      maxLength={14}
+                      onChange={(e) => {
+                        const formattedPhone = formatNicaraguanPhone(e.target.value);
+                        handleChangeFormState('phone', formattedPhone);
+                      }}
+                    />
                   </>
                 </FormSection>
               </div>
