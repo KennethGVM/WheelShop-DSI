@@ -95,7 +95,8 @@ export interface CustomerProps {
   municipalityId: string;
   municipalityName: string;
   departmentName: string;
-
+  isNatural: boolean;
+  identificationType: number;
 }
 
 export interface CategoryCustomerProps {
